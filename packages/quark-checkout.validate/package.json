@@ -1,0 +1,25 @@
+{
+  "name": "@departurelabs/quark-checkout.validate",
+  "version": "0.0.1",
+  "description": "Runtime validation for Quark checkout data",
+  "main": "./dist/quark-checkout.validate.esm.js",
+  "browser": "./dist/quark-checkout.validate.umd.js",
+  "module": "./dist/quark-checkout.validate.esm.js",
+  "dependencies": {
+    "@dfinity/principal": "^0.15.0",
+    "zod": "3.19.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DepartureLabsIC/quark-checkout.git"
+  },
+  "author": "Departure Labs",
+  "bugs": {
+    "url": "https://github.com/DepartureLabsIC/quark-checkout/issues"
+  },
+  "homepage": "https://github.com/DepartureLabsIC/quark-checkout#readme"
+}
