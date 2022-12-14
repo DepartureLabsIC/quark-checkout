@@ -28,17 +28,20 @@ const DESCRIPTION = {
 }
 
 const II = z.literal("ii", { description: "Internet Identity" })
-const NFID = z.literal("nfid", { description: "Non-Fungible Identity" })
-const PLUG = z.literal("plug", { description: "Plug wallet" })
-// TODO: support more providers than just II
-// export const PROVIDERS = [II.value
+export type II = z.infer<typeof II>
+// const NFID = z.literal("nfid", { description: "Non-Fungible Identity" })
+// const PLUG = z.literal("plug", { description: "Plug wallet" })
+// const Provider = z.union([II, NFID, PLUG], {
+//   description: DESCRIPTION.PROVIDER,
+//   invalid_type_error: "Invalid provider",
+//   required_error: `Config.provider is required. Expected Provider as String. Choose between: ${printProviders()}`,
+// })
+
 export const PROVIDERS = { II: II.value }
 
 const printProviders = () => Object.values(PROVIDERS).join(", ")
-const Provider = z.union([II, NFID, PLUG], {
-  description: DESCRIPTION.PROVIDER,
-  invalid_type_error: "Invalid provider",
-  required_error: `Config.provider is required. Expected Provider as String. Choose between: ${printProviders()}`,
+const Provider = z.string().refine(s => s === II.value, {
+  message: `Invalid provider. Expected Provider as String. Choose between: ${printProviders()}`,
 })
 
 const Integrator = z

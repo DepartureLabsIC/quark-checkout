@@ -28,6 +28,6 @@ function createConfig(name) {
 }
 
 export default [
-  createConfig("quark-checkout", false),
-  createConfig("quark-checkout.validate", false),
+  createConfig("quark-checkout"),
+  createConfig("quark-checkout.validate"),
 ]

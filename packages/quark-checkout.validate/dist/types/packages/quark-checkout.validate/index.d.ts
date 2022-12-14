@@ -9,7 +9,7 @@
  */
 import { Config, Basket } from "../../src/schemas";
 declare function config(c: Config): {
-    provider: "ii" | "nfid" | "plug";
+    provider: string;
     integrator: string;
     domain: string;
     callback: (args_0: any, ...args_1: unknown[]) => any;

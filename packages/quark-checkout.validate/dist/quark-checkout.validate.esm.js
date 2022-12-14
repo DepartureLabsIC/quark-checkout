@@ -23,14 +23,17 @@ const DESCRIPTION = {
     },
 };
 const II = z.literal("ii", { description: "Internet Identity" });
-const NFID = z.literal("nfid", { description: "Non-Fungible Identity" });
-const PLUG = z.literal("plug", { description: "Plug wallet" });
-const PROVIDERS = [II.value, NFID.value, PLUG.value];
-const printProviders = () => PROVIDERS.map(p => p).join(", ");
-const Provider = z.union([II, NFID, PLUG], {
-    description: DESCRIPTION.PROVIDER,
-    invalid_type_error: "Invalid provider",
-    required_error: `Config.provider is required. Expected Provider as String. Choose between: ${printProviders()}`,
+// const NFID = z.literal("nfid", { description: "Non-Fungible Identity" })
+// const PLUG = z.literal("plug", { description: "Plug wallet" })
+// const Provider = z.union([II, NFID, PLUG], {
+//   description: DESCRIPTION.PROVIDER,
+//   invalid_type_error: "Invalid provider",
+//   required_error: `Config.provider is required. Expected Provider as String. Choose between: ${printProviders()}`,
+// })
+const PROVIDERS = { II: II.value };
+const printProviders = () => Object.values(PROVIDERS).join(", ");
+const Provider = z.string().refine(s => s === II.value, {
+    message: `Invalid provider. Expected Provider as String. Choose between: ${printProviders()}`,
 });
 const Integrator = z
     .string({

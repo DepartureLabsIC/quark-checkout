@@ -38,12 +38,7 @@
  **/
 
 import { createCheckout } from "./checkout"
-import {
-  type Config,
-  type Checkout,
-  type Closure,
-  PROVIDERS,
-} from "../../src/schemas"
+import { type Config, type Checkout, type Closure } from "../../src/schemas"
 
 export function initialize(config: Config): Checkout {
   // higher order variables that get assigned upon checkout
@@ -66,7 +61,7 @@ export function initialize(config: Config): Checkout {
             basket: closure.basket,
             notify: config.notify,
             integrator: config.integrator,
-            provider: PROVIDERS.II,
+            provider: "ii",
           }),
         )
         closure.window?.postMessage(message, config.domain)

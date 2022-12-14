@@ -79,7 +79,7 @@ function initialize(config) {
                 basket: closure.basket,
                 notify: config.notify,
                 integrator: config.integrator,
-                provider: config.provider,
+                provider: "ii",
             }));
             (_a = closure.window) === null || _a === void 0 ? void 0 : _a.postMessage(message, config.domain);
         }
