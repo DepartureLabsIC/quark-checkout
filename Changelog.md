@@ -1,7 +1,6 @@
 # Changelog
 
-- 1.0.0 initial release
-- 2.0.0 This version contained the following changes:
+- 0.0.1 initial release (forked from Motoko Quark's quark.js)
   - Introduced zod schemas
   - Introduced TypeScript
   - Split up initialization and checkout into multiple files

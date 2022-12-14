@@ -1,7 +1,6 @@
 import { z } from "zod"
 import { Principal as P } from "@dfinity/principal"
 
-// TODO: use Principal type
 const validatePrincipal = (p: string) => {
   try {
     return p === P.fromText(p).toText()
@@ -28,15 +27,6 @@ const DESCRIPTION = {
 }
 
 const II = z.literal("ii", { description: "Internet Identity" })
-export type II = z.infer<typeof II>
-// const NFID = z.literal("nfid", { description: "Non-Fungible Identity" })
-// const PLUG = z.literal("plug", { description: "Plug wallet" })
-// const Provider = z.union([II, NFID, PLUG], {
-//   description: DESCRIPTION.PROVIDER,
-//   invalid_type_error: "Invalid provider",
-//   required_error: `Config.provider is required. Expected Provider as String. Choose between: ${printProviders()}`,
-// })
-
 export const PROVIDERS = { II: II.value }
 
 const printProviders = () => Object.values(PROVIDERS).join(", ")
@@ -124,10 +114,8 @@ export type Config = z.infer<typeof Config>
 const TEST = z.literal("TEST", {
   description: "Quark Test Token. Used for development on testnets",
 })
-const ICP = z.literal("ICP", {
-  description: "Internet Computer Token. Used for production on mainnet",
-})
-export const TOKENS = [TEST.value]
+export const TOKENS = { II: II.value }
+
 /**
  * BasketItem
  */
@@ -155,10 +143,9 @@ const Value = z
   })
   .positive({ message: "Basket.value must be greater than 0" })
 
-const Token = z.union([TEST, ICP], {
-  description: "Type of token used to pay for this Basket item.",
-  invalid_type_error: "Invalid Basket.token Type. Expected String",
-  required_error: "Basket.token is required",
+const printTokens = () => Object.values(TOKENS).join(", ")
+const Token = z.string().refine(s => s === TEST.value, {
+  message: `Invalid provider. Expected Provider as String. Choose between: ${printTokens()}`,
 })
 
 /**

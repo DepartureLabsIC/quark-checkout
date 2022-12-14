@@ -1,6 +1,4 @@
 import { z } from "zod";
-declare const II: z.ZodLiteral<"ii">;
-export type II = z.infer<typeof II>;
 export declare const PROVIDERS: {
     II: "ii";
 };
@@ -44,22 +42,24 @@ export declare const Config: z.ZodObject<{
     };
 }>;
 export type Config = z.infer<typeof Config>;
-export declare const TOKENS: "TEST"[];
+export declare const TOKENS: {
+    II: "ii";
+};
 export declare const Basket: z.ZodArray<z.ZodObject<{
     name: z.ZodString;
     description: z.ZodString;
     value: z.ZodNumber;
-    token: z.ZodUnion<[z.ZodLiteral<"TEST">, z.ZodLiteral<"ICP">]>;
+    token: z.ZodEffects<z.ZodString, string, string>;
 }, "strip", z.ZodTypeAny, {
     description: string;
     value: number;
     name: string;
-    token: "TEST" | "ICP";
+    token: string;
 }, {
     description: string;
     value: number;
     name: string;
-    token: "TEST" | "ICP";
+    token: string;
 }>, "many">;
 export type Basket = z.infer<typeof Basket>;
 /**
@@ -69,17 +69,17 @@ declare const Checkout: z.ZodFunction<z.ZodTuple<[z.ZodArray<z.ZodObject<{
     name: z.ZodString;
     description: z.ZodString;
     value: z.ZodNumber;
-    token: z.ZodUnion<[z.ZodLiteral<"TEST">, z.ZodLiteral<"ICP">]>;
+    token: z.ZodEffects<z.ZodString, string, string>;
 }, "strip", z.ZodTypeAny, {
     description: string;
     value: number;
     name: string;
-    token: "TEST" | "ICP";
+    token: string;
 }, {
     description: string;
     value: number;
     name: string;
-    token: "TEST" | "ICP";
+    token: string;
 }>, "many">], z.ZodUnknown>, z.ZodBoolean>;
 export type Checkout = z.infer<typeof Checkout>;
 export type Closure = {
@@ -101,17 +101,17 @@ declare const CreateCheckoutConfig: z.ZodObject<{
             name: z.ZodString;
             description: z.ZodString;
             value: z.ZodNumber;
-            token: z.ZodUnion<[z.ZodLiteral<"TEST">, z.ZodLiteral<"ICP">]>;
+            token: z.ZodEffects<z.ZodString, string, string>;
         }, "strip", z.ZodTypeAny, {
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }, {
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }>, "many">>;
     }, "strip", z.ZodTypeAny, {
         window?: any;
@@ -119,7 +119,7 @@ declare const CreateCheckoutConfig: z.ZodObject<{
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }[] | undefined;
     }, {
         window?: any;
@@ -127,7 +127,7 @@ declare const CreateCheckoutConfig: z.ZodObject<{
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }[] | undefined;
     }>;
 }, "strict", z.ZodTypeAny, {
@@ -139,7 +139,7 @@ declare const CreateCheckoutConfig: z.ZodObject<{
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }[] | undefined;
     };
 }, {
@@ -151,7 +151,7 @@ declare const CreateCheckoutConfig: z.ZodObject<{
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }[] | undefined;
     };
 }>;
@@ -165,17 +165,17 @@ declare const CreateCheckout: z.ZodFunction<z.ZodTuple<[z.ZodObject<{
             name: z.ZodString;
             description: z.ZodString;
             value: z.ZodNumber;
-            token: z.ZodUnion<[z.ZodLiteral<"TEST">, z.ZodLiteral<"ICP">]>;
+            token: z.ZodEffects<z.ZodString, string, string>;
         }, "strip", z.ZodTypeAny, {
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }, {
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }>, "many">>;
     }, "strip", z.ZodTypeAny, {
         window?: any;
@@ -183,7 +183,7 @@ declare const CreateCheckout: z.ZodFunction<z.ZodTuple<[z.ZodObject<{
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }[] | undefined;
     }, {
         window?: any;
@@ -191,7 +191,7 @@ declare const CreateCheckout: z.ZodFunction<z.ZodTuple<[z.ZodObject<{
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }[] | undefined;
     }>;
 }, "strict", z.ZodTypeAny, {
@@ -203,7 +203,7 @@ declare const CreateCheckout: z.ZodFunction<z.ZodTuple<[z.ZodObject<{
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }[] | undefined;
     };
 }, {
@@ -215,24 +215,24 @@ declare const CreateCheckout: z.ZodFunction<z.ZodTuple<[z.ZodObject<{
             description: string;
             value: number;
             name: string;
-            token: "TEST" | "ICP";
+            token: string;
         }[] | undefined;
     };
 }>], z.ZodUnknown>, z.ZodFunction<z.ZodTuple<[z.ZodArray<z.ZodObject<{
     name: z.ZodString;
     description: z.ZodString;
     value: z.ZodNumber;
-    token: z.ZodUnion<[z.ZodLiteral<"TEST">, z.ZodLiteral<"ICP">]>;
+    token: z.ZodEffects<z.ZodString, string, string>;
 }, "strip", z.ZodTypeAny, {
     description: string;
     value: number;
     name: string;
-    token: "TEST" | "ICP";
+    token: string;
 }, {
     description: string;
     value: number;
     name: string;
-    token: "TEST" | "ICP";
+    token: string;
 }>, "many">], z.ZodUnknown>, z.ZodBoolean>>;
 export type CreateCheckout = z.infer<typeof CreateCheckout>;
 export {};

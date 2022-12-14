@@ -10,15 +10,11 @@
 import { Config, Basket } from "../../src/schemas"
 
 function config(c: Config) {
-  const r = Config.parse(c)
-  console.log("🚀 ~ file: validate.ts:5 ~ config ~ r", r)
-  return r
+  return Config.parse(c)
 }
 
 function basket(b: Basket) {
-  const r = Basket.parse(b)
-  console.log("🚀 ~ file: validate.ts:5 ~ config ~ r", r)
-  return r
+  return Basket.parse(b)
 }
 
 const validate = { config, basket }

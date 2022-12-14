@@ -15,6 +15,7 @@ function createConfig(name) {
         format: `umd`,
         exports: `named`,
         sourcemap: true,
+        globals: { zod: "zod", "@dfinity/principal": "@dfinity/principal" },
       },
       {
         name,
@@ -22,6 +23,7 @@ function createConfig(name) {
         format: `esm`,
         exports: `named`,
         sourcemap: true,
+        globals: { zod: "zod", "@dfinity/principal": "@dfinity/principal" },
       },
     ],
   }

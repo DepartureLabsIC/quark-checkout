@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { Principal as Principal$1 } from '@dfinity/principal';
 
-// TODO: use Principal type
 const validatePrincipal = (p) => {
     try {
         return p === Principal$1.fromText(p).toText();
@@ -23,13 +22,6 @@ const DESCRIPTION = {
     },
 };
 const II = z.literal("ii", { description: "Internet Identity" });
-// const NFID = z.literal("nfid", { description: "Non-Fungible Identity" })
-// const PLUG = z.literal("plug", { description: "Plug wallet" })
-// const Provider = z.union([II, NFID, PLUG], {
-//   description: DESCRIPTION.PROVIDER,
-//   invalid_type_error: "Invalid provider",
-//   required_error: `Config.provider is required. Expected Provider as String. Choose between: ${printProviders()}`,
-// })
 const PROVIDERS = { II: II.value };
 const printProviders = () => Object.values(PROVIDERS).join(", ");
 const Provider = z.string().refine(s => s === II.value, {
@@ -105,10 +97,7 @@ const Config = z
 const TEST = z.literal("TEST", {
     description: "Quark Test Token. Used for development on testnets",
 });
-const ICP = z.literal("ICP", {
-    description: "Internet Computer Token. Used for production on mainnet",
-});
-[TEST.value];
+const TOKENS = { II: II.value };
 /**
  * BasketItem
  */
@@ -134,10 +123,9 @@ const Value = z
     required_error: "Basket.value is required",
 })
     .positive({ message: "Basket.value must be greater than 0" });
-const Token = z.union([TEST, ICP], {
-    description: "Type of token used to pay for this Basket item.",
-    invalid_type_error: "Invalid Basket.token Type. Expected String",
-    required_error: "Basket.token is required",
+const printTokens = () => Object.values(TOKENS).join(", ");
+const Token = z.string().refine(s => s === TEST.value, {
+    message: `Invalid provider. Expected Provider as String. Choose between: ${printTokens()}`,
 });
 /**
  * Basket
@@ -193,14 +181,10 @@ z.function().args(CreateCheckoutConfig).returns(Checkout);
  * basket data during runtime.
  */
 function config(c) {
-    const r = Config.parse(c);
-    console.log("🚀 ~ file: validate.ts:5 ~ config ~ r", r);
-    return r;
+    return Config.parse(c);
 }
 function basket(b) {
-    const r = Basket.parse(b);
-    console.log("🚀 ~ file: validate.ts:5 ~ config ~ r", r);
-    return r;
+    return Basket.parse(b);
 }
 const validate = { config, basket };
 

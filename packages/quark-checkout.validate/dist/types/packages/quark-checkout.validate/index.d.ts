@@ -22,7 +22,7 @@ declare function basket(b: Basket): {
     description: string;
     value: number;
     name: string;
-    token: "TEST" | "ICP";
+    token: string;
 }[];
 declare const validate: {
     config: typeof config;
