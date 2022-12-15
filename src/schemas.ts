@@ -51,8 +51,9 @@ const Domain = z
     required_error: "Config.domain is required",
   })
   .url({ message: "Invalid url" })
-  .startsWith("https://", { message: "Must provide secure URL" })
-  .endsWith(".ic0.app", { message: "Only .ic0.app domains allowed" })
+  .regex(/^https?:\/\/(localhost:\d+|.ic0.app)$/i, {
+    message: "Invalid domain",
+  })
 
 // .args() is `MessageEvent.data`
 // See: https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent/data
