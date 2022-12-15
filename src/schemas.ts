@@ -51,7 +51,7 @@ const Domain = z
     required_error: "Config.domain is required",
   })
   .url({ message: "Invalid url" })
-  .regex(/^https?:\/\/(localhost:\d+|.ic0.app)$/i, {
+  .regex(/(^http:\/\/localhost:\d+$)|(^(https:\/\/).*(.ic0.app)$)/i, {
     message: "Invalid domain",
   })
 

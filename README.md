@@ -215,6 +215,10 @@ following values to the `provider` property when calling `initialize`:
 > npm run build
 > git add .
 > git commit -m "changes"
+> cd packages/quark-checkout
+> npm version <patch/minor/major>
+> npm publish
+> cd packages/quark-checkout.validate
 > npm version <patch/minor/major>
 > npm publish
 ```
