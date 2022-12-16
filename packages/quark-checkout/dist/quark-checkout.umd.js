@@ -66,6 +66,12 @@
      *
      * checkout(basket);
      **/
+    const PROVIDERS = {
+        II: "ii",
+    };
+    const TOKENS = {
+        TEST: "TEST",
+    };
     function initialize(config) {
         // higher order variables that get assigned upon checkout
         const closure = {
@@ -85,7 +91,7 @@
                     basket: closure.basket,
                     notify: config.notify,
                     integrator: config.integrator,
-                    provider: "ii",
+                    provider: config.provider,
                 }));
                 (_a = closure.window) === null || _a === void 0 ? void 0 : _a.postMessage(message, config.domain);
             }
@@ -97,6 +103,8 @@
         return createCheckout({ provider, domain, closure });
     }
 
+    exports.PROVIDERS = PROVIDERS;
+    exports.TOKENS = TOKENS;
     exports.initialize = initialize;
 
 }));

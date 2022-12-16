@@ -1,7 +1,12 @@
 import { z } from "zod";
-export declare const PROVIDERS: {
-    II: "ii";
-};
+declare const Providers: z.ZodObject<{
+    II: z.ZodLiteral<string>;
+}, "strip", z.ZodTypeAny, {
+    II: string;
+}, {
+    II: string;
+}>;
+export type Providers = z.infer<typeof Providers>;
 /**
  * Config
  *
@@ -42,9 +47,14 @@ export declare const Config: z.ZodObject<{
     };
 }>;
 export type Config = z.infer<typeof Config>;
-export declare const TOKENS: {
-    II: "ii";
-};
+declare const Tokens: z.ZodObject<{
+    TEST: z.ZodLiteral<"TEST">;
+}, "strip", z.ZodTypeAny, {
+    TEST: "TEST";
+}, {
+    TEST: "TEST";
+}>;
+export type Tokens = z.infer<typeof Tokens>;
 export declare const Basket: z.ZodArray<z.ZodObject<{
     name: z.ZodString;
     description: z.ZodString;

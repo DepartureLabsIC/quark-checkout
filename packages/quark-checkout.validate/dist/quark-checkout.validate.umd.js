@@ -24,11 +24,16 @@
             DESCRIPTION: "Optional description of the basket item.",
         },
     };
-    const II = zod.z.literal("ii", { description: "Internet Identity" });
-    const PROVIDERS = { II: II.value };
+    const PROVIDERS = {
+        II: "ii",
+    };
+    const II = zod.z.literal(PROVIDERS.II, { description: "Internet Identity" });
     const printProviders = () => Object.values(PROVIDERS).join(", ");
     const Provider = zod.z.string().refine(s => s === II.value, {
         message: `Invalid provider. Expected Provider as String. Choose between: ${printProviders()}`,
+    });
+    zod.z.object({
+        II,
     });
     const Integrator = zod.z
         .string({
@@ -96,13 +101,6 @@
         .required()
         .strict();
     /**
-     * Tokens
-     */
-    const TEST = zod.z.literal("TEST", {
-        description: "Quark Test Token. Used for development on testnets",
-    });
-    const TOKENS = { II: II.value };
-    /**
      * BasketItem
      */
     const Name = zod.z
@@ -127,9 +125,21 @@
         required_error: "Basket.value is required",
     })
         .positive({ message: "Basket.value must be greater than 0" });
+    /**
+     * Tokens
+     */
+    const TOKENS = {
+        TEST: "TEST",
+    };
+    const TEST = zod.z.literal("TEST", {
+        description: "Quark Test Token. Used for development on testnets",
+    });
     const printTokens = () => Object.values(TOKENS).join(", ");
     const Token = zod.z.string().refine(s => s === TEST.value, {
         message: `Invalid provider. Expected Provider as String. Choose between: ${printTokens()}`,
+    });
+    zod.z.object({
+        TEST,
     });
     /**
      * Basket

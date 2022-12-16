@@ -10,7 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": ".",
     "declaration": true,
-    "declarationDir": "./types",
-    "moduleResolution": "node"
+    "declarationDir": "./types"
   }
 }

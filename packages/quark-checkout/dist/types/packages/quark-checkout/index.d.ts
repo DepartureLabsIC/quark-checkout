@@ -36,5 +36,8 @@
  *
  * checkout(basket);
  **/
-import { type Config, type Checkout } from "../../src/schemas";
+import { type Config, type Checkout, type Basket, type Providers, type Tokens } from "../../src/schemas";
+export { Config, Basket };
+export declare const PROVIDERS: Providers;
+export declare const TOKENS: Tokens;
 export declare function initialize(config: Config): Checkout;
