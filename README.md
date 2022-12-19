@@ -35,26 +35,25 @@ npm i -S @departurelabs/quark-checkout @departurelabs/quark-checkout.validate
 Example integration:
 
 ```js
-import { initialize } from "@departurelabs/quark-checkout"
-// NOTE: quark.validate can be removed when you have a valid configuration
+import { initialize, PROVIDERS, TOKENS } from "@departurelabs/quark-checkout"
+// NOTE: `validate` can be removed once you have ensured
+// you are using the correct configuration and basket values
 import { validate } from "@departurelabs/quark-checkout.validate"
 
 const { checkout } = initialize(
   validate.config({
-    provider: "ii",
-    domain: "https://pwwjo-6qaaa-aaaam-aadka-cai.ic0.app",
+    provider: PROVIDERS.II,
+    domain: "https://34dvu-aqaaa-aaaah-qc6ua-cai.ic0.app",
     notify: {
       principalId: "dlftw-sqaaa-aaaaa-danil-cai",
-      methodName: "callback",
+      methodName: "canisterMethod",
     },
     integrator: "company@testnet.quark",
     callback: event => {
-      if (event.type === "checkoutComplete") {
-        if (event.data.result === "Accepted") {
-          checkoutComplete()
-        } else {
-          checkoutFailed()
-        }
+      if (event.data.result === "Accepted") {
+        checkoutComplete()
+      } else {
+        checkoutFailed()
       }
     },
   }),
@@ -65,12 +64,16 @@ const basket = [
     name: "Spoon",
     description: "Use this for your soup",
     value: 10000000,
-    token: "ICP",
+    token: TOKENS.TEST,
   },
 ]
 
 checkout(validate.basket(basket))
 ```
+
+You can also see our
+[example project tori](https://github.com/DepartureLabsIC/rs_tori) which we use
+for testing and development.
 
 ## Publishing
 
@@ -86,10 +89,13 @@ checkout(validate.basket(basket))
 > npm publish
 ```
 
+We aim to keep the version numbers of the two packages in sync.
+
 ## Websites
 
-- [GitHub Quark source](https://github.com/DepartureLabsIC/rs_quark)
-- [GitHub Quark npm package source](https://github.com/DepartureLabsIC/quark-checkout)
+- [Quark source](https://github.com/DepartureLabsIC/rs_quark)
+- [Client integration packages source](https://github.com/DepartureLabsIC/quark-checkout)
+- [Example project source](https://github.com/DepartureLabsIC/rs_tori)
 
 ## Motoko Quark (DEPRECATED)
 

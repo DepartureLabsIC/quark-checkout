@@ -1,14 +1,21 @@
 # @departurelabs/quark-checkout
 
 - [@departurelabs/quark-checkout](#departurelabsquark-checkout)
+  - [Testnet](#testnet)
   - [Installation](#installation)
   - [Usage](#usage)
     - [Configuration validation](#configuration-validation)
     - [Configuration properties](#configuration-properties)
+  - [Basket structure](#basket-structure)
   - [Cross-tab communication](#cross-tab-communication)
   - [Token support](#token-support)
   - [Authentication providers](#authentication-providers)
   - [Websites](#websites)
+
+## Testnet
+
+Currently Quark is only available as a testnet. No real tokens are being used
+except for Quark's own TEST token.
 
 ## Installation
 
@@ -25,19 +32,17 @@ import { initialize, TOKENS, PROVIDERS } from "@departurelabs/quark-checkout"
 
 const { checkout } = initialize(
   provider: PROVIDERS.II,
-  domain: "https://pwwjo-6qaaa-aaaam-aadka-cai.ic0.app",
+  domain: "https://34dvu-aqaaa-aaaah-qc6ua-cai.ic0.app",
   notify: {
     principalId: "dlftw-sqaaa-aaaaa-danil-cai",
-    methodName: "callback",
+    methodName: "canisterMethod",
   },
   integrator: "company@testnet.quark",
   callback: event => {
-    if (event.type === "checkoutComplete") {
-      if (event.data.result === "Accepted") {
-        checkoutComplete()
-      } else {
-        checkoutFailed()
-      }
+    if (event.data.result === "Accepted") {
+      checkoutComplete()
+    } else {
+      checkoutFailed()
     }
   },
 )
@@ -54,11 +59,16 @@ const basket = [
 checkout(basket)
 ```
 
+You can also see our
+[example project tori](https://github.com/DepartureLabsIC/rs_tori) which we use
+for testing and development.
+
 ### Configuration validation
 
 To help you integrate Quark we have another package to validate your
 configuration and basket values in runtime. This package is not ment for
-production, but to ensure you're using the right values.
+production, but to help you ensure you're using the correct configuration and
+basket values
 
 See:
 [@departurelabs/quark-checkout.validate](https://www.npmjs.com/package/@departurelabs/quark-checkout.validate)
@@ -76,17 +86,19 @@ See:
 - `notify`: An object containing the Principal ID as a string and the name of
   the canister method as a string.
 - `notify.principalId`: The Principal ID of the canister that will receive the
-  callback.
-- `notify.methodName`: We call this public method when a user completes a
+  callback from the Quark canister. Learn more about the
+  [canister implementation](https://www.notion.so/departurelabs/Backend-Hosted-Checkout-docs-draft-7f92887c65c84be9be568624909474f0)
+- `notify.methodName`: We call this canister method when a user completes a
   transaction. The Canister will be required to accept or deny each incoming
-  transaction.
+  transaction. Learn more about the
+  [canister implementation](https://www.notion.so/departurelabs/Backend-Hosted-Checkout-docs-draft-7f92887c65c84be9be568624909474f0)
 - `integrator`: The Quark Account ID of the recipient of the payment.
   **Warning!** This principal must be able to invoke calls against Quark in
   order to withdraw funds. Please use only use a canister, a dfx principal
   identity, or a Quark user principal unless you are absolutely sure about what
   you are doing.
 - `callback`: A javascript method implemented by the integrator to be invoked by
-  quark-checkout upon a checkout Event.
+  the MessageEvent handler upon receiving an Event with type ``.
 
 Example events:
 
@@ -103,6 +115,20 @@ data.
 
 Once you have instantiated the `checkout` Function we can begin creating a
 basket with a couple of transaction items.
+
+## Basket structure
+
+- `basket` The basket is a list of transaction items, defined by the merchant,
+  that contains the data necessary for the checkout:
+  - `name` - the name of the checked out product. e.g. “Spoon”
+  - `value` - the value of the checkout out product. Specified as fractional
+    units of an TEST token—called e8s—as a whole number, where one e8 is the
+    smallest unit of a TEST token. For example, 1.05000000 is 1 TEST and 5000000
+    e8s.
+  - `token` - the token used for the transaction of this basket item. Note: at
+    this moment we only support TEST
+  - `description` - optional description of the checked out product. e.g. “Used
+    to eat soup”
 
 ## Cross-tab communication
 
@@ -180,3 +206,4 @@ We export the `PROVIDERS` object to make it easier to use these values.
   Quark Integration Script
 - [GitHub Quark source](https://github.com/DepartureLabsIC/rs_quark)
 - [GitHub Quark npm package source](https://github.com/DepartureLabsIC/quark-checkout)
+- [GitHub Tori QA example](https://5peht-hiaaa-aaaam-aayqq-cai.ic0.app/login)

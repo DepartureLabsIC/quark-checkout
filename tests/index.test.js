@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest"
 import { initialize } from "../packages/quark/index"
 
 const ALLOWED_AUTH_PROVIDERS = ["ii"]
-const ALLOWED_VALUE_TYPES = ["ICP"]
+const ALLOWED_VALUE_TYPES = ["TEST"]
 
 describe("@quark-checkout", async () => {
   describe("init", () => {
