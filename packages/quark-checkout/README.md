@@ -5,7 +5,6 @@
   - [Usage](#usage)
     - [Configuration validation](#configuration-validation)
     - [Configuration properties](#configuration-properties)
-  - [Basket structure](#basket-structure)
   - [Cross-tab communication](#cross-tab-communication)
   - [Token support](#token-support)
   - [Authentication providers](#authentication-providers)
@@ -66,34 +65,28 @@ See:
 
 ### Configuration properties
 
-`provider` - The provider used to authenticate the user. This value is used to
-redirect the user quickly to the correct authentication page when they are
-checking out but not yet authenticated. See
-[Authentication providers](#authentication-providers) for a list of the
-providers we currently support.
-
-`domain` - The domain quark-checkout will send a user to upon checkout. In the
-future, we expect larger services might want to self-host their own checkout
-pages.
-
-`notify` - An object containing the Principal ID as a string and the name of the
-canister method as a string.
-
-`notify.principalId` - The Principal ID of the canister that will receive the
-callback.
-
-`notify.methodName` - We call this public method when a user completes a
-transaction. The Canister will be required to accept or deny each incoming
-transaction.
-
-`integrator` - The Quark Account ID of the recipient of the payment.
-
-**Warning!** This principal must be able to invoke calls against Quark in order
-to withdraw funds. Please use only use a canister, a dfx principal identity, or
-a Quark user principal unless you are absolutely sure about what you are doing.
-
-`callback` - A javascript method implemented by the integrator to be invoked by
-quark-checkout upon a checkout Event.
+- `provider`: The provider used to authenticate the user. This value is used to
+  redirect the user quickly to the correct authentication page when they are
+  checking out but not yet authenticated. See
+  [Authentication providers](#authentication-providers) for a list of the
+  providers we currently support.
+- `domain`: The domain quark-checkout will send a user to upon checkout. In the
+  future, we expect larger services might want to self-host their own checkout
+  pages.
+- `notify`: An object containing the Principal ID as a string and the name of
+  the canister method as a string.
+- `notify.principalId`: The Principal ID of the canister that will receive the
+  callback.
+- `notify.methodName`: We call this public method when a user completes a
+  transaction. The Canister will be required to accept or deny each incoming
+  transaction.
+- `integrator`: The Quark Account ID of the recipient of the payment.
+  **Warning!** This principal must be able to invoke calls against Quark in
+  order to withdraw funds. Please use only use a canister, a dfx principal
+  identity, or a Quark user principal unless you are absolutely sure about what
+  you are doing.
+- `callback`: A javascript method implemented by the integrator to be invoked by
+  quark-checkout upon a checkout Event.
 
 Example events:
 
@@ -110,20 +103,6 @@ data.
 
 Once you have instantiated the `checkout` Function we can begin creating a
 basket with a couple of transaction items.
-
-## Basket structure
-
-- `basket` The basket is a list of transaction items, defined by the merchant,
-  that contains the data necessary for the checkout:
-  - `name` - the name of the checked out product. e.g. “Spoon”
-  - `value` - the value of the checkout out product. Specified as fractional
-    units of an ICP token—called e8s—as a whole number, where one e8 is the
-    smallest unit of an ICP token. For example, 1.05000000 is 1 ICP and 5000000
-    e8s.
-  - `token` - the token used for the transaction of this basket item. Note: at
-    this moment we only support ICP
-  - `description` - optional description of the checked out product. e.g. “Used
-    to eat soup”
 
 ## Cross-tab communication
 
@@ -179,6 +158,8 @@ recommend using libraries such as:
 - [currency.js](https://currency.js.org/)
 - [dinero.js](https://dinerojs.com/)
 - [numeral.js](http://numeraljs.com/)
+
+We export the `TOKENS` object to make it easier to use these values.
 
 ## Authentication providers
 

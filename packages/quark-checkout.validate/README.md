@@ -3,7 +3,8 @@
 - [@departurelabs/quark-checkout](#departurelabsquark-checkout)
   - [Installation](#installation)
   - [Usage](#usage)
-  - [Websites](#websites)
+  - [Basket structure](#basket-structure)
+    - [Websites](#websites)
 
 ## Installation
 
@@ -53,7 +54,21 @@ const basket = [
 checkout(validate.basket(basket))
 ```
 
-## Websites
+## Basket structure
+
+- `basket` The basket is a list of transaction items, defined by the merchant,
+  that contains the data necessary for the checkout:
+  - `name` - the name of the checked out product. e.g. “Spoon”
+  - `value` - the value of the checkout out product. Specified as fractional
+    units of an ICP token—called e8s—as a whole number, where one e8 is the
+    smallest unit of an ICP token. For example, 1.05000000 is 1 ICP and 5000000
+    e8s.
+  - `token` - the token used for the transaction of this basket item. Note: at
+    this moment we only support ICP
+  - `description` - optional description of the checked out product. e.g. “Used
+    to eat soup”
+
+### Websites
 
 - [@departurelabs/quark-checkout](https://www.npmjs.com/package/@departurelabs/quark-checkout)
   Quark Integration script
