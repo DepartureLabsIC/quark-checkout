@@ -26,7 +26,7 @@ const { checkout } = initialize(
     domain: "https://34dvu-aqaaa-aaaah-qc6ua-cai.ic0.app",
     notify: {
       principalId: "dlftw-sqaaa-aaaaa-danil-cai",
-      methodName: "canisterMethod",
+      methodName: "callback",
     },
     integrator: "company@testnet.quark",
     callback: event => {

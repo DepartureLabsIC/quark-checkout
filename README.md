@@ -1,4 +1,4 @@
-# @departurelabs/quark-checkout
+# Quark Client Integration
 
 Quark's npm packages to integrate Quark in in your IC application to support
 payments on Dfinity's Internet Computer.
@@ -7,10 +7,11 @@ Quark makes it incredibly simple to collect payments in your IC applications.
 Its multi-canister architecture Quark makes the product scalable to handle any
 amount of traffic at any time of the day.
 
-- [@departurelabs/quark-checkout](#departurelabsquark-checkout)
+- [Quark Client Integration](#quark-client-integration)
   - [Packages](#packages)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [Example](#example)
   - [Publishing](#publishing)
   - [Websites](#websites)
   - [Motoko Quark (DEPRECATED)](#motoko-quark-deprecated)
@@ -46,7 +47,7 @@ const { checkout } = initialize(
     domain: "https://34dvu-aqaaa-aaaah-qc6ua-cai.ic0.app",
     notify: {
       principalId: "dlftw-sqaaa-aaaaa-danil-cai",
-      methodName: "canisterMethod",
+      methodName: "callback",
     },
     integrator: "company@testnet.quark",
     callback: event => {
@@ -71,6 +72,8 @@ const basket = [
 checkout(validate.basket(basket))
 ```
 
+## Example
+
 You can also see our
 [example project tori](https://github.com/DepartureLabsIC/rs_tori) which we use
 for testing and development.
@@ -94,7 +97,8 @@ We aim to keep the version numbers of the two packages in sync.
 ## Websites
 
 - [Quark source](https://github.com/DepartureLabsIC/rs_quark)
-- [Client integration packages source](https://github.com/DepartureLabsIC/quark-checkout)
+- [NPM @departurelabs/quark-checkout](https://www.npmjs.com/package/@departurelabs/quark-checkout)
+- [NPM @departurelabs/quark-checkout.validate](https://www.npmjs.com/package/@departurelabs/quark-checkout.validate)
 - [Example project source](https://github.com/DepartureLabsIC/rs_tori)
 
 ## Motoko Quark (DEPRECATED)

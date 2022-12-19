@@ -6,7 +6,8 @@
   - [Usage](#usage)
     - [Configuration validation](#configuration-validation)
     - [Configuration properties](#configuration-properties)
-  - [Basket structure](#basket-structure)
+    - [Basket structure](#basket-structure)
+    - [Example project](#example-project)
   - [Cross-tab communication](#cross-tab-communication)
   - [Token support](#token-support)
   - [Authentication providers](#authentication-providers)
@@ -35,7 +36,7 @@ const { checkout } = initialize(
   domain: "https://34dvu-aqaaa-aaaah-qc6ua-cai.ic0.app",
   notify: {
     principalId: "dlftw-sqaaa-aaaaa-danil-cai",
-    methodName: "canisterMethod",
+    methodName: "callback",
   },
   integrator: "company@testnet.quark",
   callback: event => {
@@ -58,10 +59,6 @@ const basket = [
 
 checkout(basket)
 ```
-
-You can also see our
-[example project tori](https://github.com/DepartureLabsIC/rs_tori) which we use
-for testing and development.
 
 ### Configuration validation
 
@@ -87,11 +84,11 @@ See:
   the canister method as a string.
 - `notify.principalId`: The Principal ID of the canister that will receive the
   callback from the Quark canister. Learn more about the
-  [canister implementation](https://www.notion.so/departurelabs/Backend-Hosted-Checkout-docs-draft-7f92887c65c84be9be568624909474f0)
+  [canister implementation](https://departurelabs.notion.site/Backend-Hosted-Checkout-docs-draft-7f92887c65c84be9be568624909474f0)
 - `notify.methodName`: We call this canister method when a user completes a
   transaction. The Canister will be required to accept or deny each incoming
   transaction. Learn more about the
-  [canister implementation](https://www.notion.so/departurelabs/Backend-Hosted-Checkout-docs-draft-7f92887c65c84be9be568624909474f0)
+  [canister implementation](https://departurelabs.notion.site/Backend-Hosted-Checkout-docs-draft-7f92887c65c84be9be568624909474f0)
 - `integrator`: The Quark Account ID of the recipient of the payment.
   **Warning!** This principal must be able to invoke calls against Quark in
   order to withdraw funds. Please use only use a canister, a dfx principal
@@ -116,7 +113,7 @@ data.
 Once you have instantiated the `checkout` Function we can begin creating a
 basket with a couple of transaction items.
 
-## Basket structure
+### Basket structure
 
 - `basket` The basket is a list of transaction items, defined by the merchant,
   that contains the data necessary for the checkout:
@@ -129,6 +126,12 @@ basket with a couple of transaction items.
     this moment we only support TEST
   - `description` - optional description of the checked out product. e.g. “Used
     to eat soup”
+
+### Example project
+
+You can also see our
+[example project tori](https://github.com/DepartureLabsIC/rs_tori) which we use
+for testing and development.
 
 ## Cross-tab communication
 
