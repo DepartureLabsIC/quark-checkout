@@ -1,6 +1,6 @@
 {
   "name": "@departurelabs/quark-checkout.validate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "Runtime validation for Quark checkout data",
   "main": "./dist/quark-checkout.validate.esm.js",

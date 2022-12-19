@@ -1,6 +1,6 @@
 {
   "name": "@departurelabs/quark-checkout",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "Quark Checkout script",
   "main": "./dist/quark-checkout.esm.js",
