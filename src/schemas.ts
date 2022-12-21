@@ -33,7 +33,7 @@ const PROVIDERS = {
 const II = z.literal(PROVIDERS.II, { description: "Internet Identity" })
 
 const printProviders = () => Object.values(PROVIDERS).join(", ")
-const Provider = z.string().refine(s => s === II.value, {
+const Provider = z.string().refine((s: string) => s === II.value, {
   message: `Invalid provider. Expected Provider as String. Choose between: ${printProviders()}`,
 })
 
@@ -83,7 +83,7 @@ const Principal = z
     description: DESCRIPTION.NOTIFY.PRINCIPAL_ID,
     required_error: "Config.notify.principalId is required",
   })
-  .refine(p => validatePrincipal(p), {
+  .refine((p: string) => validatePrincipal(p), {
     message: "Invalid Principal ID",
   })
 
@@ -154,7 +154,7 @@ const TEST = z.literal("TEST", {
   description: "Quark Test Token. Used for development on testnets",
 })
 const printTokens = () => Object.values(TOKENS).join(", ")
-const Token = z.string().refine(s => s === TEST.value, {
+const Token = z.string().refine((s: string) => s === TEST.value, {
   message: `Invalid provider. Expected Provider as String. Choose between: ${printTokens()}`,
 })
 const Tokens = z.object({
